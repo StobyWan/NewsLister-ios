@@ -184,7 +184,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
         cell.textLabel.text = dict.name;
         cell.imageView.image = dict.logo;
-        
+        cell.imageView.backgroundColor = [UIColor darkTextColor];
         return cell;
 
     }

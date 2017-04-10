@@ -16,6 +16,18 @@
     }
 }
 
+- (IBAction)shareArticle:(id)sender {
+    
+        NSMutableArray *sharingItems = [NSMutableArray new];
+ 
+        if (self.article.url) {
+            [sharingItems addObject: self.article.url];
+        }
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+        [self presentViewController:activityController animated:YES completion:nil];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -61,4 +73,5 @@
         }
     }];
 }
+
 @end

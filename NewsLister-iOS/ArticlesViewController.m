@@ -38,19 +38,30 @@
 
 -(void)fetchData{
     
-    UtilityService * utils = [UtilityService sharedInstance];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    UtilityService * utils = [UtilityService sharedInstance];
+    
     [utils fetchDataWithUrl:self.url withView:self.view andHandler:^(NSDictionary * json) {
         NSArray * articles = [json objectForKey:@"articles"];
-    
+        
         for (id object in articles){
             Article * article = [[Article alloc] initWithDictionary:object];
             [self.articles addObject:article];
         }
-        
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -71,7 +82,7 @@
     }
     
     Article * article = [self.articles objectAtIndex:indexPath.row];
-
+    
     cell.headerLabel.text = article.title;
     cell.subheaderLabel.text = article.author;
     cell.decsriptionlabel.text = article.descript;
@@ -99,7 +110,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         WebViewController *destViewController = segue.destinationViewController;
         Article * article = [self.articles objectAtIndex:indexPath.row];
-
+        
         [destViewController setArticle:article];
     }
 }
