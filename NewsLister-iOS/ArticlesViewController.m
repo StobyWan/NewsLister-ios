@@ -18,7 +18,7 @@
 
 - (void)configureView {
     if (self.source) {
-        self.url = [NSString stringWithFormat:@"%@?source=%@&apiKey=%@",ARTICLES_URL,self.source,API_KEY];
+        self.url = [NSString stringWithFormat:@"%@?source=%@&apiKey=%@",ARTICLES_URL,self.source.sourceId,API_KEY];
     }
 }
 
@@ -28,6 +28,8 @@
     self.tableView.delegate = self;
     [self configureView];
     [self fetchData];
+    self.title = self.source.name;
+    self.articles = [[NSMutableArray alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -39,7 +41,13 @@
     UtilityService * utils = [UtilityService sharedInstance];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [utils fetchDataWithUrl:self.url withView:self.view andHandler:^(NSDictionary * json) {
-        self.articles = [json objectForKey:@"articles"];
+        NSArray * articles = [json objectForKey:@"articles"];
+    
+        for (id object in articles){
+            Article * article = [[Article alloc] initWithDictionary:object];
+            [self.articles addObject:article];
+        }
+        
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
@@ -62,10 +70,8 @@
         cell = [[CustomArticleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    NSDictionary * dict = [self.articles objectAtIndex:indexPath.row];
-    
-    Article * article = [[Article alloc] initWithDictionary:dict];
-    
+    Article * article = [self.articles objectAtIndex:indexPath.row];
+
     cell.headerLabel.text = article.title;
     cell.subheaderLabel.text = article.author;
     cell.decsriptionlabel.text = article.descript;
@@ -79,9 +85,9 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setSource:(NSString *)sourceText {
-    if (_source != sourceText) {
-        _source = sourceText;
+- (void)setSource:(Source *)source {
+    if (_source != source) {
+        _source = source;
         [self configureView];
     }
 }
@@ -92,9 +98,9 @@
     if ([segue.identifier isEqualToString:@"showWebView"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         WebViewController *destViewController = segue.destinationViewController;
-        NSDictionary * dict = [self.articles objectAtIndex:indexPath.row];
-        NSString * url = dict[@"url"];
-        [destViewController setUrl:url];
+        Article * article = [self.articles objectAtIndex:indexPath.row];
+
+        [destViewController setArticle:article];
     }
 }
 

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "Article.h"
 @interface WebViewController : UIViewController<WKNavigationDelegate>
     @property (strong, nonatomic) WKWebView *webView;
-    @property (strong, nonatomic) NSString *newsURL;
+    @property (strong, nonatomic) Article *article;
     @property (strong, nonatomic) NSString *url;
-    - (void)setUrl:(NSString *)url;
+    - (void)setArticle:(Article *)article;
 @end

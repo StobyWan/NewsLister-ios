@@ -11,15 +11,15 @@
 @implementation WebViewController
 
 - (void)configureView {
-    if (self.newsURL) {
-        self.url = self.newsURL;
+    if (self.article) {
+        self.url = self.article.url;
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSURL *url = [NSURL URLWithString:self.newsURL];
+    NSURL *url = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
@@ -29,15 +29,16 @@
     self.webView.frame = CGRectMake(self.view.bounds.origin.x,self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
     self.webView.backgroundColor = [self colorFromHexString:@"#1F2124"];
     [self.view addSubview:self.webView];
+    self.title = self.article.title;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)setUrl:(NSString *)url {
-    if (_newsURL != url) {
-        _newsURL = url;
+- (void)setArticle:(Article *)article {
+    if (_article != article) {
+        _article = article;
         [self configureView];
     }
 }

@@ -20,7 +20,7 @@
 #import "SectionHeaderView.h"
 
 @interface SourceViewController ()
-
+@property (strong, nonatomic) UIRefreshControl* refreshControl;
 @end
 
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
@@ -44,6 +44,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
      selector:@selector(reloadCollection)
      name:@"MTPostNotification"
      object:nil];
+    
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)reloadCollection{
@@ -58,7 +62,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [utils fetchDataWithUrl:SOURCES_URL withView:self.view andHandler:^(NSDictionary * json) {
         
         [self processSources: [json objectForKey:@"sources"] andHandler:^() {
-           
+            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }];
     }];
@@ -120,8 +124,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     if ([segue.identifier isEqualToString:@"showArticlesDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ArticlesViewController *destViewController = segue.destinationViewController;
-        Source* dict = [self.sources objectAtIndex:indexPath.row];
-        NSString * source = dict.sourceId;
+        Source* source = [self.sources objectAtIndex:indexPath.row];
         [destViewController setSource:source];
     }
     
@@ -129,7 +132,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:(UICollectionViewCell*)sender];
         WebViewController *destWebViewController = segue.destinationViewController;
         Article * article = [self.topArticles objectAtIndex:indexPath.item];
-        [destWebViewController setUrl:article.url];
+        [destWebViewController setArticle:article];
     }
 }
 

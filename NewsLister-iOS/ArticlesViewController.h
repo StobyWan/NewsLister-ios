@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Source.h"
 @interface ArticlesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
     @property (weak, nonatomic) IBOutlet UITableView *tableView;
-    @property NSArray * articles;
-    @property (weak, nonatomic) NSString * source;
+    @property NSMutableArray * articles;
+//    @property (weak, nonatomic) NSString * source;
+    @property (strong,nonatomic) Source * source;
     @property NSString * url;
-    - (void)setSource:(NSString *)source;
+    - (void)setSource:(Source *)source;
 @end
