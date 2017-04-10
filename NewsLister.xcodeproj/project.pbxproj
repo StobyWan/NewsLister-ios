@@ -85,7 +85,7 @@
 		8B2763CE1E9A991700162E21 = {
 			isa = PBXGroup;
 			children = (
-				8B2763D91E9A991700162E21 /* NewsLister-iOS */,
+				8B2763D91E9A991700162E21 /* NewsLister */,
 				8B2763D81E9A991700162E21 /* Products */,
 				8B27642F1E9AD13600162E21 /* Frameworks */,
 			);
@@ -99,7 +99,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8B2763D91E9A991700162E21 /* NewsLister-iOS */ = {
+		8B2763D91E9A991700162E21 /* NewsLister */ = {
 			isa = PBXGroup;
 			children = (
 				8BEC62491E9BF24B00422D6B /* Services */,
@@ -117,6 +117,7 @@
 				8B2763EE1E9A991700162E21 /* Info.plist */,
 				8B2763DA1E9A991700162E21 /* Supporting Files */,
 			);
+			name = NewsLister;
 			path = "NewsLister-iOS";
 			sourceTree = "<group>";
 		};
@@ -241,7 +242,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B2763D21E9A991700162E21 /* Build configuration list for PBXProject "NewsLister-iOS" */;
+			buildConfigurationList = 8B2763D21E9A991700162E21 /* Build configuration list for PBXProject "NewsLister" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -438,7 +439,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B2763D21E9A991700162E21 /* Build configuration list for PBXProject "NewsLister-iOS" */ = {
+		8B2763D21E9A991700162E21 /* Build configuration list for PBXProject "NewsLister" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B2763EF1E9A991700162E21 /* Debug */,

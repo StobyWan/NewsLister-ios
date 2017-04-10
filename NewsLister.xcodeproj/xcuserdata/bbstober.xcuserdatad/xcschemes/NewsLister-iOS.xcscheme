@@ -17,7 +17,7 @@
                BlueprintIdentifier = "8B2763D61E9A991700162E21"
                BuildableName = "NewsLister.app"
                BlueprintName = "NewsLister"
-               ReferencedContainer = "container:NewsLister-iOS.xcodeproj">
+               ReferencedContainer = "container:NewsLister.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "8B2763D61E9A991700162E21"
             BuildableName = "NewsLister.app"
             BlueprintName = "NewsLister"
-            ReferencedContainer = "container:NewsLister-iOS.xcodeproj">
+            ReferencedContainer = "container:NewsLister.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "8B2763D61E9A991700162E21"
             BuildableName = "NewsLister.app"
             BlueprintName = "NewsLister"
-            ReferencedContainer = "container:NewsLister-iOS.xcodeproj">
+            ReferencedContainer = "container:NewsLister.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "8B2763D61E9A991700162E21"
             BuildableName = "NewsLister.app"
             BlueprintName = "NewsLister"
-            ReferencedContainer = "container:NewsLister-iOS.xcodeproj">
+            ReferencedContainer = "container:NewsLister.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
