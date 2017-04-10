@@ -28,6 +28,7 @@
 		8B27644D1E9BBAFF00162E21 /* UIColor+helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B27644C1E9BBAFF00162E21 /* UIColor+helpers.m */; };
 		8B2764501E9BBDDC00162E21 /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B27644F1E9BBDDC00162E21 /* SectionHeaderView.m */; };
 		8B2764521E9BBE6100162E21 /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2764511E9BBE6100162E21 /* SectionHeaderView.xib */; };
+		8BEC624C1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC624B1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,8 @@
 		8B27644E1E9BBDDC00162E21 /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		8B27644F1E9BBDDC00162E21 /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
 		8B2764511E9BBE6100162E21 /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
+		8BEC624A1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+beginRefreshing.h"; sourceTree = "<group>"; };
+		8BEC624B1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+beginRefreshing.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +194,8 @@
 		8B27644A1E9BBA3800162E21 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				8BEC624A1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.h */,
+				8BEC624B1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.m */,
 				8B27644B1E9BBAFF00162E21 /* UIColor+helpers.h */,
 				8B27644C1E9BBAFF00162E21 /* UIColor+helpers.m */,
 			);
@@ -282,6 +287,7 @@
 				8B2764431E9B07EF00162E21 /* Source.m in Sources */,
 				8B2764391E9AE2AC00162E21 /* TopCollectionViewCell.m in Sources */,
 				8B2763F61E9AA06400162E21 /* Constants.m in Sources */,
+				8BEC624C1E9C1A9E00422D6B /* UIRefreshControl+beginRefreshing.m in Sources */,
 				8B27644D1E9BBAFF00162E21 /* UIColor+helpers.m in Sources */,
 				8B2764491E9BB19900162E21 /* TopTableViewCell.m in Sources */,
 				8B2763FC1E9AAAD900162E21 /* ArticlesViewController.m in Sources */,
@@ -418,6 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3W7GMD637Q;
 				INFOPLIST_FILE = "NewsLister-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryanstoberdesign.newslister;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -430,6 +437,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3W7GMD637Q;
 				INFOPLIST_FILE = "NewsLister-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryanstoberdesign.newslister;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,6 +13,7 @@
 #import "WebViewController.h"
 #import "UtilityService.h"
 #import "MBProgressHUD.h"
+#import "UIRefreshControl+beginRefreshing.h"
 
 @implementation ArticlesViewController
 
@@ -27,9 +28,17 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self configureView];
-    [self fetchData];
     self.title = self.source.name;
     self.articles = [[NSMutableArray alloc] init];
+    self.refreshControl = [UIRefreshControl new];
+    
+    [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl setTintColor:[UIColor whiteColor]];
+    [self.refreshControl beginRefreshingProgrammatically];
+    [self fetchData];
+    //    [self.tableView setHidden:YES];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -38,7 +47,7 @@
 
 -(void)fetchData{
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     UtilityService * utils = [UtilityService sharedInstance];
     
@@ -49,19 +58,12 @@
             Article * article = [[Article alloc] initWithDictionary:object];
             [self.articles addObject:article];
         }
+        
+        //        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        //            [self.tableView setHidden:NO];
+        [self.refreshControl endRefreshing];
         [self.tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

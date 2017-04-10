@@ -13,6 +13,7 @@
     @property NSMutableArray * articles;
 //    @property (weak, nonatomic) NSString * source;
     @property (strong,nonatomic) Source * source;
+    @property (strong,nonatomic) UIRefreshControl * refreshControl;
     @property NSString * url;
     - (void)setSource:(Source *)source;
 @end

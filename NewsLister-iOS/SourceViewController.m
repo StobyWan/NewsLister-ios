@@ -18,9 +18,10 @@
 #import "TopTableViewCell.h"
 #import "UIColor+helpers.h"
 #import "SectionHeaderView.h"
-
+#import "UIRefreshControl+beginRefreshing.h"
 @interface SourceViewController ()
 @property (strong, nonatomic) UIRefreshControl* refreshControl;
+
 @end
 
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
@@ -34,7 +35,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     self.topArticles = [[NSMutableArray alloc] init];
     self.sources = [[NSMutableArray alloc] init];
-    [self fetchData];
+ 
     
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
@@ -45,9 +46,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
      name:@"MTPostNotification"
      object:nil];
     
-    self.refreshControl = [[UIRefreshControl alloc]init];
-    [self.tableView addSubview:self.refreshControl];
+    self.refreshControl = [UIRefreshControl new];
+  
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+      [self.refreshControl setTintColor:[UIColor whiteColor]];
+     [self.refreshControl beginRefreshingProgrammatically];
+    [self fetchData];
 }
 
 - (void)reloadCollection{
@@ -58,11 +63,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)fetchData {
     
     UtilityService * utils = [UtilityService sharedInstance];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+ 
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   
     [utils fetchDataWithUrl:SOURCES_URL withView:self.view andHandler:^(NSDictionary * json) {
         
         [self processSources: [json objectForKey:@"sources"] andHandler:^() {
-            [self.refreshControl endRefreshing];
+           
             [self.tableView reloadData];
         }];
     }];
@@ -105,7 +112,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
         dispatch_sync(dispatch_get_main_queue(), ^{
               [[NSNotificationCenter defaultCenter] postNotificationName:@"MTPostNotification" object:nil userInfo:nil];
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+//             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self.refreshControl endRefreshing];
                 callback();
         });
     });

@@ -8,6 +8,8 @@
 
 #import "WebViewController.h"
 #import "MBProgressHUD.h"
+#import "UIColor+helpers.h"
+
 @implementation WebViewController
 
 - (void)configureView {
@@ -18,14 +20,21 @@
 
 - (IBAction)shareArticle:(id)sender {
     
-        NSMutableArray *sharingItems = [NSMutableArray new];
- 
-        if (self.article.url) {
-            [sharingItems addObject: self.article.url];
-        }
-        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
-        [self presentViewController:activityController animated:YES completion:nil];
-
+    NSMutableArray *sharingItems = [[NSMutableArray alloc] init];
+    NSURL *urlToShare = [NSURL URLWithString:self.article.url];
+    
+    if (urlToShare) {
+        [sharingItems addObject: urlToShare];
+        
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc]initWithActivityItems:sharingItems applicationActivities:nil];
+        activityViewController.excludedActivityTypes = @[
+                                                         UIActivityTypePrint,
+                                                         UIActivityTypeAssignToContact,
+                                                         UIActivityTypeSaveToCameraRoll,
+                                                         UIActivityTypeAirDrop];
+        
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    }
 }
 
 - (void)viewDidLoad {
@@ -33,15 +42,16 @@
     
     NSURL *url = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
-    self.webView.navigationDelegate = self;
-    [MBProgressHUD showHUDAddedTo:self.webView animated:YES];
-    [self.webView loadRequest:request];
-    self.webView.frame = CGRectMake(self.view.bounds.origin.x,self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
-    self.webView.backgroundColor = [self colorFromHexString:@"#1F2124"];
-    [self.view addSubview:self.webView];
     self.title = self.article.title;
+//    [self.shareButton setEnabled:NO];
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.frame];
+    self.webView.navigationDelegate = self;
+//    [MBProgressHUD showHUDAddedTo:self.webView animated:YES];
+    [self.webView loadRequest:request];
+    self.webView.frame = CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    self.webView.backgroundColor = [UIColor colorFromHexString:@"#1F2124"];
+    [self.view addSubview:self.webView];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,23 +65,16 @@
     }
 }
 
-- (UIColor *)colorFromHexString:(NSString *)hexString {
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexString];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-}
-
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    [webView evaluateJavaScript:@"document.body.innerHTML" completionHandler:^(id result, NSError *error) {
-        if (result != nil) {
-            [MBProgressHUD hideHUDForView:self.webView animated:YES];
-        }
-        if(error) {
-            NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
-        }
-    }];
-}
+//- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+//    [webView evaluateJavaScript:@"document.body.innerHTML" completionHandler:^(id result, NSError *error) {
+//        if (result != nil) {
+////            [self.shareButton setEnabled:YES];
+////            [MBProgressHUD hideHUDForView:self.webView animated:YES];
+//        }
+//        if(error) {
+//            NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
+//        }
+//    }];
+//}
 
 @end

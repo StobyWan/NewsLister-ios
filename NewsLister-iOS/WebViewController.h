@@ -11,6 +11,7 @@
 #import "Article.h"
 @interface WebViewController : UIViewController<WKNavigationDelegate>
 
+    @property (strong, nonatomic) IBOutlet UIBarButtonItem *shareButton;
     @property (strong, nonatomic) WKWebView *webView;
     @property (strong, nonatomic) Article *article;
     @property (strong, nonatomic) NSString *url;
