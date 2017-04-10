@@ -1,2 +1,2 @@
 # NewsLister-ios
-A simple iOS News app
+An iOS News app
