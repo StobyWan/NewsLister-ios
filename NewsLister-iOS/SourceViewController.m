@@ -7,24 +7,25 @@
 //
 
 #import "SourceViewController.h"
-#import "Constants.h"
 #import "ArticlesViewController.h"
-#import "TopCollectionViewCell.h"
+#import "Constants.h"
 #import "Article.h"
 #import "Source.h"
 #import "WebViewController.h"
-#import "MBProgressHUD.h"
 #import "UtilityService.h"
 #import "TopTableViewCell.h"
-#import "UIColor+helpers.h"
+#import "TopCollectionViewCell.h"
 #import "SectionHeaderView.h"
+#import "UIColor+helpers.h"
 #import "UIRefreshControl+beginRefreshing.h"
+
 @interface SourceViewController ()
 @property (strong, nonatomic) UIRefreshControl* refreshControl;
-
 @end
 
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
+static NSString *topTableCellIdentifier = @"MCell";
+static NSString *simpleTableIdentifier = @"Cell";
 
 @implementation SourceViewController
 
@@ -35,7 +36,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     self.topArticles = [[NSMutableArray alloc] init];
     self.sources = [[NSMutableArray alloc] init];
- 
+    
     
     UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
     [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];
@@ -47,29 +48,25 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
      object:nil];
     
     self.refreshControl = [UIRefreshControl new];
-  
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
-      [self.refreshControl setTintColor:[UIColor whiteColor]];
-     [self.refreshControl beginRefreshingProgrammatically];
+    [self.refreshControl setTintColor:[UIColor whiteColor]];
+    [self.refreshControl beginRefreshingProgrammatically];
     [self fetchData];
 }
 
 - (void)reloadCollection{
-    
     [self.delegate updateCollectionViewWithArray:self.topArticles];
 }
 
 - (void)fetchData {
     
     UtilityService * utils = [UtilityService sharedInstance];
- 
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-   
+    
     [utils fetchDataWithUrl:SOURCES_URL withView:self.view andHandler:^(NSDictionary * json) {
         
         [self processSources: [json objectForKey:@"sources"] andHandler:^() {
-           
+            
             [self.tableView reloadData];
         }];
     }];
@@ -85,8 +82,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             Source * source = [[Source alloc] initWithDictionary:object];
             [self.sources addObject:source];
             
-            if(i < 15){
-                
+            if(i < 12){
                 if ([source.sortBysAvailable containsObject:@"top"]) {
                     
                     NSString * u = [NSString stringWithFormat:@"%@?source=%@&apiKey=%@",ARTICLES_URL,source.sourceId,API_KEY];
@@ -101,23 +97,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     }];
                 }
             }
-            
             i++;
-            
-            if(i > 15){
-              
-            }
         }
         
-
         dispatch_sync(dispatch_get_main_queue(), ^{
-              [[NSNotificationCenter defaultCenter] postNotificationName:@"MTPostNotification" object:nil userInfo:nil];
-//             [MBProgressHUD hideHUDForView:self.view animated:YES];
-             [self.refreshControl endRefreshing];
-                callback();
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MTPostNotification" object:nil userInfo:nil];
+            [self.refreshControl endRefreshing];
+            callback();
         });
     });
-   }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -150,9 +139,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     if(section == 0){
         return 1;
     }else{
-      return [self.sources count];
+        return [self.sources count];
     }
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -166,35 +154,35 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (__kindof UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(indexPath.section == 0){
-        static NSString *simpleTableIdentifier = @"MCell";
+       
         
-        TopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        TopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:topTableCellIdentifier];
         
         if (cell == nil) {
-            cell = [[TopTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+            cell = [[TopTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:topTableCellIdentifier];
         }
         
         cell.topArticles = self.topArticles;
+        
         self.delegate = cell;
         self.collectionView = cell.collectionView;
         return cell;
-
-    }else{
-        static NSString *simpleTableIdentifier = @"Cell";
         
+    }else{
+   
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         
-        Source * dict = [self.sources objectAtIndex:indexPath.row];
+        Source * source = [self.sources objectAtIndex:indexPath.row];
         
-        cell.textLabel.text = dict.name;
-        cell.imageView.image = dict.logo;
+        cell.textLabel.text = source.name;
+        cell.imageView.image = source.logo;
         cell.imageView.backgroundColor = [UIColor darkTextColor];
+        
         return cell;
-
     }
 }
 
@@ -206,30 +194,20 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     BSSectionHeaderView *sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:SectionHeaderViewIdentifier];
     
     sectionHeaderView.frame = CGRectMake(0, 0, 320, 48);
+    
     if(section == 0){
-         sectionHeaderView.titleLabel.text = @"Top Stories";
+        sectionHeaderView.titleLabel.text = @"Top Stories";
     }else{
-         sectionHeaderView.titleLabel.text = @"News Sources";
+        sectionHeaderView.titleLabel.text = @"News Sources";
     }
     
-  
     sectionHeaderView.section = section;
-//    sectionHeaderView.delegate = self;
     
     return sectionHeaderView;
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
-}
-
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if(section == 0){
-       return @"Top Stories";
-    }else{
-        return @"News Sources";
-    }
 }
 
 @end

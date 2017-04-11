@@ -19,7 +19,6 @@
     return self;
 }
 
-
 - (id)initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];

@@ -11,7 +11,6 @@
 @interface ArticlesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
     @property (weak, nonatomic) IBOutlet UITableView *tableView;
     @property NSMutableArray * articles;
-//    @property (weak, nonatomic) NSString * source;
     @property (strong,nonatomic) Source * source;
     @property (strong,nonatomic) UIRefreshControl * refreshControl;
     @property NSString * url;

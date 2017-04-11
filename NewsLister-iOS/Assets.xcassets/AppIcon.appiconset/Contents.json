@@ -1,16 +1,76 @@
 {
   "images" : [
     {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "IconNotificationRetina3xP.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "IconPadRetinaQ.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "IconNotificationQ.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "IconSettingsRetina3xP.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "60x60",
       "idiom" : "iphone",
       "filename" : "IconPhoneRetinaP.png",
       "scale" : "2x"
     },
     {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "IconSettingsQ.png",
+      "scale" : "1x"
+    },
+    {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "IconSpotlightRetinaP.png",
+      "filename" : "IconSpotlightRetina3xP.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "IconSpotlightQ.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "IconPadProRetinaQ.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "IconNotificationRetinaP.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "IconNotificationRetinaQ.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "IconPadQ.png",
+      "scale" : "1x"
     },
     {
       "size" : "29x29",
@@ -19,9 +79,9 @@
       "scale" : "2x"
     },
     {
-      "size" : "20x20",
-      "idiom" : "iphone",
-      "filename" : "IconNotificationRetinaP.png",
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "IconSettingsRetinaQ.png",
       "scale" : "2x"
     },
     {
@@ -33,20 +93,14 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "IconSpotlightRetina3xP.png",
-      "scale" : "3x"
+      "filename" : "IconSpotlightRetinaP.png",
+      "scale" : "2x"
     },
     {
-      "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "IconSettingsRetina3xP.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "20x20",
-      "idiom" : "iphone",
-      "filename" : "IconNotificationRetina3xP.png",
-      "scale" : "3x"
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "IconSpotlightRetinaQ.png",
+      "scale" : "2x"
     }
   ],
   "info" : {

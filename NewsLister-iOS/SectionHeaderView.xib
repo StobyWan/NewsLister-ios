@@ -26,7 +26,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                    <color key="backgroundColor" red="0.12156862745098039" green="0.12941176470588234" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="3" firstAttribute="leading" secondItem="37" secondAttribute="leadingMargin" id="1qw-kW-Xpg"/>
                         <constraint firstItem="3" firstAttribute="centerY" secondItem="37" secondAttribute="centerY" constant="0.5" id="bsD-1Q-eEI"/>
@@ -34,7 +34,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="37" firstAttribute="top" secondItem="2" secondAttribute="top" id="47"/>
