@@ -4,9 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,30 +18,43 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                            <rect key="frame" x="8" y="14" width="304" height="33.5"/>
+                            <rect key="frame" x="8" y="13" width="66.5" height="34"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEx-hK-0sf">
+                            <rect key="frame" x="278" y="19" width="22" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="MNN-YH-Kwk"/>
+                            </constraints>
+                            <connections>
+                                <action selector="toggleOpen:" destination="2" eventType="touchUpInside" id="tkd-V1-YsR"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.12156862745098039" green="0.12941176470588234" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="3" firstAttribute="leading" secondItem="37" secondAttribute="leadingMargin" id="1qw-kW-Xpg"/>
-                        <constraint firstItem="3" firstAttribute="centerY" secondItem="37" secondAttribute="centerY" constant="0.5" id="bsD-1Q-eEI"/>
-                        <constraint firstItem="3" firstAttribute="trailing" secondItem="37" secondAttribute="trailingMargin" id="wjM-9w-qqy"/>
+                        <constraint firstItem="hEx-hK-0sf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3" secondAttribute="trailing" constant="8" id="01q-vZ-8Qp"/>
+                        <constraint firstItem="3" firstAttribute="leading" secondItem="37" secondAttribute="leading" constant="8" id="3Lr-cs-kR1"/>
+                        <constraint firstAttribute="bottom" secondItem="3" secondAttribute="bottom" constant="13" id="KKO-Iy-d7K"/>
+                        <constraint firstItem="3" firstAttribute="top" secondItem="37" secondAttribute="top" constant="13" id="X7l-S4-QAE"/>
+                        <constraint firstAttribute="bottom" secondItem="hEx-hK-0sf" secondAttribute="bottom" constant="19" id="kgN-1G-sxf"/>
+                        <constraint firstItem="hEx-hK-0sf" firstAttribute="top" secondItem="37" secondAttribute="top" constant="19" id="rs6-RT-3r0"/>
+                        <constraint firstAttribute="trailing" secondItem="hEx-hK-0sf" secondAttribute="trailing" constant="20" id="weV-b5-Jh2"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="37" firstAttribute="top" secondItem="2" secondAttribute="top" id="47"/>
-                <constraint firstAttribute="trailing" secondItem="37" secondAttribute="trailing" id="48"/>
-                <constraint firstAttribute="bottom" secondItem="37" secondAttribute="bottom" id="49"/>
-                <constraint firstItem="37" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="50"/>
+                <constraint firstItem="37" firstAttribute="top" secondItem="2" secondAttribute="top" id="MnV-un-Nip"/>
+                <constraint firstAttribute="trailing" secondItem="37" secondAttribute="trailing" id="cmD-tm-lPc"/>
+                <constraint firstItem="37" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="y0a-Yc-Ylz"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="disclosureButton" destination="hEx-hK-0sf" id="Ugu-eW-2qm"/>
                 <outlet property="titleLabel" destination="3" id="2Y7-mT-2FG"/>
             </connections>
             <point key="canvasLocation" x="34" y="151"/>

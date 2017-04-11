@@ -15,10 +15,9 @@
 #import "UtilityService.h"
 #import "TopTableViewCell.h"
 #import "TopCollectionViewCell.h"
-#import "SectionHeaderView.h"
 #import "UIColor+helpers.h"
 #import "UIRefreshControl+beginRefreshing.h"
-
+#import "InfoViewController.h"
 @interface SourceViewController ()
 @property (strong, nonatomic) UIRefreshControl* refreshControl;
 @end
@@ -200,7 +199,7 @@ static NSString *simpleTableIdentifier = @"Cell";
     }else{
         sectionHeaderView.titleLabel.text = @"News Sources";
     }
-    
+    sectionHeaderView.delegate = self;
     sectionHeaderView.section = section;
     
     return sectionHeaderView;
@@ -208,6 +207,15 @@ static NSString *simpleTableIdentifier = @"Cell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
+}
+
+- (void)sectionHeaderView:(BSSectionHeaderView *)sectionHeaderView sectionOpened:(NSInteger)section{
+    
+    InfoViewController *vc = (InfoViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"InfoVC"];
+
+    [self presentViewController:vc  animated:YES completion:^{
+      
+    }];
 }
 
 @end

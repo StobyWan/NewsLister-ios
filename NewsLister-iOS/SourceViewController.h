@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SectionHeaderView.h"
 
 @protocol SourceViewControllerDelegate <NSObject>
 
@@ -14,7 +15,7 @@
 
 @end
 
-@interface SourceViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface SourceViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, SectionHeaderViewDelegate>
 
     @property NSArray * articles;
     @property NSMutableArray * sources;
