@@ -27,7 +27,7 @@
 
     if (self) {
         UtilityService * util = [[UtilityService alloc] init];
-        NSLog(@"Article: %@",dict);
+//        NSLog(@"Article: %@",dict);
         if(dict[@"author"] != (id)[NSNull null]){
             _author = dict[@"author"];
         }else{

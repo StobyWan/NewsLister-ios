@@ -23,7 +23,8 @@
 {
     self = [super init];
     if (self) {
-        
+        NSLog(@"Article: %@",dict);
+
         if(dict[@"id"] != (id)[NSNull null]){
             _sourceId = dict[@"id"];
         }else{
@@ -60,9 +61,10 @@
         }
         
         if(dict[@"urlsToLogos"] != (id)[NSNull null]){
-            UtilityService * utils = [UtilityService sharedInstance];
+//            UtilityService * utils = [UtilityService sharedInstance];
             _urlsToLogos = dict[@"urlsToLogos"];
-            _logo = [utils getImageFromURL:_urlsToLogos[@"small"] forSize:40];
+//            newsapi.org removed logos for unknow reason
+//            _logo = [utils getImageFromURL:_urlsToLogos[@"small"] forSize:40];
         }else{
              _logo = [UIImage imageNamed:@"news-placeholder"];
         }

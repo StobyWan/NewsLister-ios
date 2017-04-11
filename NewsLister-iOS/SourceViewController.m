@@ -93,18 +93,25 @@ static NSString *simpleTableIdentifier = @"Cell";
                         Article * article = [[Article alloc] initWithDictionary:tops[0]];
                         [self.topArticles addObject:article];
                         
+                        if([self.topArticles count] == 11){
+                            
+//                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                [[NSNotificationCenter defaultCenter] postNotificationName:@"MTPostNotification" object:nil userInfo:nil];
+                                
+                                [self.refreshControl endRefreshing];
+                                callback();
+//                            });
+
+                 
+                        }
+                        
                     }];
                 }
             }
             i++;
         }
         
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"MTPostNotification" object:nil userInfo:nil];
-            [self.refreshControl endRefreshing];
-            callback();
-        });
-    });
+            });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -178,8 +185,9 @@ static NSString *simpleTableIdentifier = @"Cell";
         Source * source = [self.sources objectAtIndex:indexPath.row];
         
         cell.textLabel.text = source.name;
-        cell.imageView.image = source.logo;
-        cell.imageView.backgroundColor = [UIColor darkTextColor];
+//        NewsApi.org removed logo's for unknown reason'
+//        cell.imageView.image = source.logo;
+//        cell.imageView.backgroundColor = [UIColor darkTextColor];
         
         return cell;
     }
@@ -201,6 +209,12 @@ static NSString *simpleTableIdentifier = @"Cell";
     }
     sectionHeaderView.delegate = self;
     sectionHeaderView.section = section;
+    if(section != 0){
+        [sectionHeaderView.disclosureButton setHidden:YES];
+    }else{
+          [sectionHeaderView.disclosureButton setHidden:NO];
+    }
+
     
     return sectionHeaderView;
 }
